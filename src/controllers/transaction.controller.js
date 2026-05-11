@@ -1,7 +1,7 @@
 const transactionModel = require("../models/transaction.model")
 const ledgerModel = require("../models/ledger.model")
 const accountModel = require("../models/account.model")
-const emailService = require("../services/email.service")
+const EmailService = require("../services/email.service")
 const mongoose = require("mongoose")
 
 /**
@@ -157,7 +157,7 @@ async function createTransaction(req, res) {
     /**
      * 10. Send email notification
      */
-    await emailService.sendTransactionEmail(req.user.email, req.user.name, amount, toAccount)
+    await EmailService.sendTransactionEmail(req.user.email, req.user.name, amount, toAccount)
 
     return res.status(201).json({
         message: "Transaction completed successfully",
